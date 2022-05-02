@@ -24,11 +24,11 @@ const Register = () => {
               <Typography variant="h5" paragraph sx={raleway}>
                 Sign Up to get personalized notifications
               </Typography>
-              <Button sx={button} href="/doctor_signup">
+              <Button sx={button} href="/signup">
                 Sign Up
               </Button>
 
-              <Button sx={button} href="/doctor_signin">
+              <Button sx={button} href="/signin">
                 Sign In
               </Button>
             </CardContent>
@@ -55,12 +55,8 @@ const Register = () => {
               <Typography variant="h5" paragraph sx={raleway}>
               </Typography>
               <br/>
-              <Button sx={button} href="/patient_signup">
-                Sign Up
-              </Button>
-
-              <Button sx={button} href="/patient_signin">
-                Sign In
+              <Button sx={button} href="/schemes">
+                Continue
               </Button>
             </CardContent>
 
