@@ -3,6 +3,9 @@ import {
   Box,
   Container,
   Grid,
+  List,
+  ListItem,
+  ListItemText,
   Typography,
   IconButton,
   TextField,
@@ -81,53 +84,41 @@ const Footer = () => {
           {/* CONTACTS */}
           <Grid xs={12} md={4}>
             <Typography variant="h6" gutterBottom sx={footerTitle}>
-              Contact us
+              Developed by
             </Typography>
             <IconButton href="#" sx={iconButton}>
-              <EmailIcon />
               <Typography variant="body2">
                 {" "}
-                sneha.20198023@mnnit.ac.in{" "}
+                1. Sneha Singh (20198023)
               </Typography>
             </IconButton>
             <IconButton href="#" sx={iconButton}>
-              <PhoneIcon />
-              <Typography variant="body2"> +91-9999 999 999 </Typography>
+              <Typography variant="body2">
+                {" "}
+                2. Mohammed Rifat Khan (20198079)
+              </Typography>
+            </IconButton>
+            <IconButton href="#" sx={iconButton}>
+              <Typography variant="body2">3. Rihan Sah (20198075)</Typography>
+            </IconButton>
+            <IconButton href="#" sx={iconButton}>
+              <Typography variant="body2">4. Raviprakash (20198102)</Typography>
             </IconButton>
           </Grid>
 
           {/* NEWSLETTER SUBSCRIPTION */}
-          <Grid>
+          <Grid xs={12} md={4}>
             <Typography variant="h6" gutterBottom sx={footerTitle}>
-              Subscribe to our newsletter
+              Information Related to
             </Typography>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                size="small"
-                sx={{
-                  backgroundColor: "#ffffff",
-                  fontFamily: "Raleway",
-                }}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                startIcon={<SendIcon />}
-                sx={sendButton}
-              >
-                Send
-              </Button>
-            </form>
+            <ul>
+              <li>Agriculture</li>
+              <li>Art & Culture</li>
+              <li>Commerce</li>
+              <li>Communications & IT</li>
+              <li>Defence</li>
+              <li>Education</li>
+            </ul>
           </Grid>
         </Grid>
       </Container>

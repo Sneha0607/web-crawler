@@ -15,7 +15,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GoogleIcon from "@mui/icons-material/Google";
-//import firebase, { auth } from "../firebase";
+import firebase, { auth } from "../firebase";
 import { box, signinGrid } from "./styles";
 
 const theme = createTheme();
@@ -29,41 +29,41 @@ const Signin = () => {
 
   // SIGN IN WITH EMAIL AND PASSWORD FUNCTION
   const handleSignin = (e) => {
-    // e.preventDefault();
-    // if (email === "" || password === "") {
-    //   return setEmailError("All fields are required!");
-    // }
+    e.preventDefault();
+    if (email === "" || password === "") {
+      return setEmailError("All fields are required!");
+    }
 
-    // auth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then(() => {
-    //     history.push("/patient/dashboard");
-    //   })
-    //   .catch((err) => {
-    //     switch (err.code) {
-    //       case "auth/user-not-found":
-    //       case "auth/invalid-email":
-    //         setEmailError(err.message);
-    //         break;
-    //       case "auth/wrong-password":
-    //         setPasswordError(err.message);
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   });
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/user-not-found":
+          case "auth/invalid-email":
+            setEmailError(err.message);
+            break;
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+            break;
+          default:
+            break;
+        }
+      });
   };
 
   // SIGN IN WITH GOOGLE FUNCTION
   const signInWithGoogle = () => {
-    // const provider = new firebase.auth.GoogleAuthProvider();
-    // firebase
-    //   .auth()
-    //   .signInWithPopup(provider)
-    //   .then(() => {
-    //     history.push("patient/profile");
-    //   })
-    //   .catch((e) => console.log(e.message));
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch((e) => console.log(e.message));
   };
 
   return (

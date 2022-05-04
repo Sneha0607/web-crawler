@@ -63,7 +63,7 @@ export const listItem = {
 export const typography = { fontWeight: "bold", color: "#063547" };
 
 export const signinGrid = {
-  backgroundImage: `url('images/signin.png')`,
+  backgroundImage: `url('images/Patient_Signin.jpg')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
@@ -72,7 +72,7 @@ export const signinGrid = {
 };
 
 export const signupGrid = {
-  backgroundImage: `url('images/signup.png')`,
+  backgroundImage: `url('images/Patient_Signup.png')`,
   backgroundRepeat: "no-repeat",
   backgroundColor: (t) =>
     t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],

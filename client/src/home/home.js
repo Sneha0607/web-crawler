@@ -4,10 +4,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Navbar from "./navbar";
 import Header from "./header";
 import Register from "./register";
+import About from "./about";
 import Footer from "./footer";
 
 const sections = [
   { title: "Home", url: "#" },
+  { title: "About", url: "#about" },
   { title: "Register", url: "#register" },
   { title: "Contact", url: "#contact" },
 ];
@@ -27,6 +29,9 @@ const Home = () => {
           <Header />
           {/* REGISTER COMPONENT - signup/signin for doctor/patient */}
           <Register />
+          <br />
+          {/* ABOUT COMPONENT - about doctors */}
+          <About />
           <br />
           {/* FOOTER COMPONENT - contacts */}
           <Footer />

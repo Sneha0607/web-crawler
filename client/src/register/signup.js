@@ -15,7 +15,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GoogleIcon from "@mui/icons-material/Google";
-//import firebase, { db, auth } from "../firebase";
+import firebase, { db, auth } from "../firebase";
 import { box, signupGrid } from "./styles";
 
 const theme = createTheme();
@@ -28,116 +28,94 @@ const Signup = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // SIGNUP WITH EMAIL AND PASSWORD FUNCTION
   const handleSignup = (e) => {
-    // e.preventDefault();
-    // setPasswordError("");
-    // setEmailError("");
-    // if (name === "") {
-    //   setNameError("Name is Required");
-    //   return;
-    // }
-    // if (password !== cpassword) {
-    //   setPasswordError("Passwords do not match");
-    //   return;
-    // }
+    e.preventDefault();
+    setPasswordError("");
+    setEmailError("");
+    if (name === "") {
+      setNameError("Name is Required");
+      return;
+    }
+    if (password !== cpassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
 
-    // // CHECK AUTHENTICATION
-    // auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((cred) => {
-    //     const user = {
-    //       displayName: name,
-    //       email: email,
-    //       password: password,
-    //       uid: cred.user.uid,
-    //     };
+    // CHECK AUTHENTICATION
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((cred) => {
+        const user = {
+          displayName: name,
+          email: email,
+          password: password,
+          uid: cred.user.uid,
+        };
 
-    //     // PUSHING USER DATA IN DB
-    //     const userRef = db.doc(`users/${user.uid}`);
-    //     userRef.set({
-    //       name,
-    //       email,
-    //       createdAt: new Date(),
-    //       uid: user.uid,
-    //     });
+        // PUSHING USER DATA IN DB
+        const userRef = db.doc(`users/${user.uid}`);
+        userRef.set({
+          name,
+          email,
+          createdAt: new Date(),
+          uid: user.uid,
+        });
 
-    //     // PUSHING PATIENT DATA IN DB
-    //     const patientRef = db.doc(`patients/${user.uid}`);
-    //     patientRef.set({
-    //       name,
-    //       email,
-    //       imageURL: null,
-    //       uid: user.uid,
-    //       isVerified: "false",
-    //       unreadCount: 1,
-    //     });
-
-    //     // PUSHING NEW NOTIFICATION
-    //     db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
-    //       message: "Complete your profile by going to the dashboard section!",
-    //       sentAt: new Date(),
-    //     });
-    //   })
-    //   .then(() => {
-    //     history.push(`/patient/dashboard`);
-    //   })
-    //   .catch((err) => {
-    //     switch (err.code) {
-    //       case "auth/email-already-in-use":
-    //       case "auth/invalid-email":
-    //         setEmailError(err.message);
-    //         break;
-    //       case "auth/weak-password":
-    //         setPasswordError(err.message);
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   });
+        // PUSHING NEW NOTIFICATION
+        // db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
+        //   message: "Complete your profile by going to the dashboard section!",
+        //   sentAt: new Date(),
+        // });
+      })
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            setEmailError(err.message);
+            break;
+          case "auth/weak-password":
+            setPasswordError(err.message);
+            break;
+          default:
+            break;
+        }
+      });
   };
 
   // SIGN UP WITH GOOGLE FUNCTION
   const signInWithGoogle = () => {
-    // const provider = new firebase.auth.GoogleAuthProvider();
-    // firebase
-    //   .auth()
-    //   .signInWithPopup(provider)
-    //   .then((cred) => {
-    //     //console.log(cred);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((cred) => {
+        //console.log(cred);
 
-    //     // PUSHING USER DATA IN DB
-    //     const userRef = db.doc(`users/${cred.user.uid}`);
-    //     userRef.set({
-    //       name: cred.user.displayName,
-    //       email: cred.user.email,
-    //       createdAt: new Date(),
-    //       uid: cred.user.uid,
-    //     });
+        // PUSHING USER DATA IN DB
+        const userRef = db.doc(`users/${cred.user.uid}`);
+        userRef.set({
+          name: cred.user.displayName,
+          email: cred.user.email,
+          createdAt: new Date(),
+          uid: cred.user.uid,
+        });
 
-    //     // PUSHING PATIENT DATA IN DB
-    //     const patientRef = db.doc(`patients/${cred.user.uid}`);
-    //     patientRef.set({
-    //       name: cred.user.displayName,
-    //       email: cred.user.email,
-    //       uid: cred.user.uid,
-    //       isVerified: "false",
-    //       imageURL: null,
-    //       unreadCount: 1,
-    //     });
-
-    //     // PUSHING NEW NOTIFICATION
-    //     db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
-    //       message: "Complete your profile by going to the dashboard section!",
-    //       sentAt: new Date(),
-    //     });
-    //   })
-    //   .then(() => {
-    //     history.push("patient/dashboard");
-    //   })
-    //   .catch((e) => console.log(e.message));
+        // PUSHING NEW NOTIFICATION
+        // db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
+        //   message: "Complete your profile by going to the dashboard section!",
+        //   sentAt: new Date(),
+        // });
+      })
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch((e) => console.log(e.message));
   };
 
   return (

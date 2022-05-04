@@ -16,7 +16,7 @@ const Navbar = (props) => {
           noWrap
           sx={title}
         >
-          Government Schemes
+          Government Schemes Alerts
         </Typography>
       </Toolbar>
 
