@@ -8,3 +8,22 @@ But one of the major hurdles which come in their way is the lack of proper infor
 
 ## Solution Proposed:
 We will attempt to provide easy and single-point access to information about several welfare schemes of the Government and their various aspects (including eligible beneficiaries, types of benefits, scheme details etc.) by implementing a web crawler that will crawl through various Government websites. We will try to include as many states as possible and as many categories of schemes. We will also provide functionalities through which people will get notified about schemes relevant to them, if possible, in their native languages along with speech recognition and text-to-speech features.
+
+## Local Installation:
+```
+git clone https://github.com/Sneha0607/medicare.git
+cd medicare
+
+#Open two terminals
+
+#1st Terminal
+cd client
+npm install
+npm start
+
+#2nd Terminal
+cd server
+npm install
+npm start
+```
+To get the database working, the firebase configuration needs to be added in client/src/firebase.js file after cloning the repository.
