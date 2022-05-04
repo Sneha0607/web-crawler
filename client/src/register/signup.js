@@ -64,11 +64,7 @@ const Signup = () => {
           uid: user.uid,
         });
 
-        // PUSHING NEW NOTIFICATION
-        // db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
-        //   message: "Complete your profile by going to the dashboard section!",
-        //   sentAt: new Date(),
-        // });
+       
       })
       .then(() => {
         navigate("/dashboard");
@@ -106,11 +102,7 @@ const Signup = () => {
           uid: cred.user.uid,
         });
 
-        // PUSHING NEW NOTIFICATION
-        // db.doc(`patients/${cred.user.uid}`).collection("notifications").add({
-        //   message: "Complete your profile by going to the dashboard section!",
-        //   sentAt: new Date(),
-        // });
+        
       })
       .then(() => {
         navigate("/dashboard");

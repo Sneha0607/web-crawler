@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { Link, Toolbar, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography, Toolbar } from "@mui/material";
+import {
+  box,
+  description,
+  aboutPaper,
+  subtitle,
+  raleway,
+  headerBox,
+} from "./styles";
 import { link, navbarToolbar, title, titleToolbar } from "./styles";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -67,9 +74,25 @@ const Schemes = () => {
         });
       })
       .catch((err) => console.log(err));
+
+      fetch("http://localhost:5000/science")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data.forEach((article) => {
+          db.collection("schemes").add({
+            title: article.title,
+            url: site + article.url,
+            topic: "science",
+            fetchedAt: new Date(),
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
-  // FETCHING PATIENT'S DATA FROM DB
+  // FETCHING USER'S DATA FROM DB
   useEffect(() => {
     db.collection("schemes").onSnapshot((snapshot) => {
       setSchemes(snapshot.docs.map((doc) => doc.data()));
@@ -145,7 +168,16 @@ const Schemes = () => {
         </Search>
       </Toolbar>
 
-      <h1>Agriculture</h1>
+      <Typography
+        component="h4"
+        variant="h4"
+        color="inherit"
+        align="center"
+        gutterBottom
+        sx={description}
+      >
+        <b>Agriculture</b>
+      </Typography>
       {schemes.map((scheme) => {
         if (scheme.topic === "agriculture")
           return (
@@ -156,7 +188,16 @@ const Schemes = () => {
           );
       })}
 
-      <h1>Education</h1>
+      <Typography
+        component="h4"
+        variant="h4"
+        color="inherit"
+        align="center"
+        gutterBottom
+        sx={description}
+      >
+        <b>Education</b>
+      </Typography>
       {schemes.map((scheme) => {
         if (scheme.topic === "education")
           return (
@@ -166,12 +207,32 @@ const Schemes = () => {
             </>
           );
       })}
+
+<Typography
+        component="h4"
+        variant="h4"
+        color="inherit"
+        align="center"
+        gutterBottom
+        sx={description}
+      >
+        <b>Science & Technology</b>
+      </Typography>
+      {schemes.map((scheme) => {
+        if (scheme.topic === "science")
+          return (
+            <>
+              <h3>{scheme.title}</h3>
+              <a href={scheme.url}>{scheme.url}</a>
+            </>
+          );
+      })}
+
     </div>
   );
 };
 
 export default Schemes;
-
 
 /*
 Agriculture

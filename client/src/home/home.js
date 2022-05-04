@@ -27,10 +27,10 @@ const Home = () => {
         <main>
           {/* HEADER COMPONENT - image with tagline*/}
           <Header />
-          {/* REGISTER COMPONENT - signup/signin for doctor/patient */}
+          {/* REGISTER COMPONENT - signup/signin for users */}
           <Register />
           <br />
-          {/* ABOUT COMPONENT - about doctors */}
+          {/* ABOUT COMPONENT */}
           <About />
           <br />
           {/* FOOTER COMPONENT - contacts */}
