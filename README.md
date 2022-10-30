@@ -11,8 +11,8 @@ We will attempt to provide easy and single-point access to information about sev
 
 ## Local Installation:
 ```
-git clone https://github.com/Sneha0607/medicare.git
-cd medicare
+git clone https://github.com/Sneha0607/web-crawler.git
+cd web-crawler
 
 #Open two terminals
 
